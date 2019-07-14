@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+
+
+    <!-- A PROGRAM WHICH ONLY PUSH VALUES TO ARRAY WHEN INPUT IS A NUMBER -->
+
+    Enter a number :-
+    <p><input id="userInput" type="text" onfocus="this.value=''"></p>
+    <p><button onclick="pushArray()">Push To Array</button></p>
+
+    <script>
+
+        inputArr = [];
+
+        function pushArray() {
+            userinput = document.getElementById('userInput').value;
+
+
+            var convert = parseInt(userinput); /* converts string to integers */
+
+            inputArr.push(convert);  /* the converted integers are then pushed */
+            console.log(inputArr);
+
+            if (isNaN(userinput)) {
+                inputArr.pop();
+                alert('You must enter a number not a string.');
+                console.warn('String type is removed from the array');
+                console.log(inputArr);
+            }
+
+        }
+
+
+
+
+
+
+
+
+
+    </script>
+
+</body>
+
+</html>

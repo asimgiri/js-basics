@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+
+
+<body>
+
+    <p><input id="first" type="text" placeholder="Enter first word" onfocus="this.value=''"></p>
+
+    <p><button onclick="pushArray()">Submit</button></p>
+
+
+
+
+    <script>
+
+        var inputArr = [];
+
+        function pushArray() {
+            userinput = document.getElementById('first').value;
+            inputArr.push(userinput);
+            console.log(inputArr);
+            alert('Value Pushed');
+        }
+
+
+
+        // var a = [1, 2, 3, 4, 'Apple'];
+
+        // a.forEach(function (value, index) {
+        //     console.log(value)
+        // })
+
+
+        // for (var i = 0; i < a.length; i++) {
+        //     if (typeof a[i] === 'string') {
+        //         console.log(a[i] + ' is a String');
+        //     }
+        //     else if (!isNaN(a[i])) {
+        //         console.log(a[i] + ' is a number');
+        //     }
+        // }
+
+
+        // var b = [
+        //     [1, 2, 3, 4, 'Mango'],
+        //     ['Orange', 'Banana', 'Grapes', 5]
+        // ]
+
+        // for (var i = 0; i < b[0].length; i++) {
+        //     if (typeof b[0][i] === 'string') {
+        //         console.log(b[0][i] + ' is a string in b[0]')
+        //     }
+        //     else {
+        //         console.log('Error');
+        //     }
+        // }
+
+
+        // var c = [
+        //     ['Dog', 'Cat', 'Mouse', 'Pigeon'],
+        //     ['Car', 'Bus', 'Ricksaw', 'Plane']
+        // ]
+
+        // for (var i = 0; i < c[1].length; i++) {
+        //     if (c[1][i].length > 3) {
+        //         console.log(c[1][i] + ' has more than 3 characters')
+        //     }
+        //     else if (c[1][i].length == 3) {
+        //         console.log(c[1][i] + ' has exactly three charactes')
+        //     }
+        // }
+
+
+    </script>
+
+</body>
+
+</html>

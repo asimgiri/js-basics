@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <p id="test"></p>
+    <p id="demo"></p>
+    <p id="nokia"></p>
+
+    <script>
+        var pet = { type: 'Doggy', breed: 'Kangal', gender: 'Male' };
+
+        document.getElementById('test').innerHTML = "The type of the pet is " + pet.type;
+
+
+        var person = {
+            firstname: 'Ram',
+            lastname: 'Siwakoti',
+            age: 36,
+            occupation: 'Officer',
+            fullName: function () {
+                return this.firstname + ' ' + this.lastname;
+            }
+        };
+
+        document.getElementById('demo').innerHTML = person.fullName();
+
+
+        var mobile = {
+            brand: 'Nokia',
+            modal: 'Nokia 6.1',
+            price: '28,000',
+            dimension: '14 inch',
+            desc: function () {
+                return this.modal + ' is another nique mobile phone in Nokia series'
+            }
+        }
+
+        document.getElementById('nokia').innerHTML = mobile.brand + ' ' + mobile.modal + ' ' + mobile.dimension;
+    </script>
+
+
+
+</body>
+
+</html>

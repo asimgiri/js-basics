@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <script>
+        // var a = [1, 2, 3, 4, 5, 6, 7, 8];
+
+        // // REPRESENTING USING FOR LOOP
+        // for (var i = 0; i < a.length; i++) {
+        //     document.write(a[i] + " ");
+        // }
+
+        // document.write('<br>')
+
+        // // REPRESENTING USING FOREACH LOOP
+        // a.forEach(function (value, index) {
+        //     document.write(value + " ");
+        // })
+
+        // var arr = [];
+
+        // // PUSHING INTO ARRAY
+        // for(var k = 1; k<=100; k++){
+        //     console.log(arr.push(k));
+        // }
+
+        var multiArr = [
+            ['Ram', 'Shyam', 'Baburam', 'Anuradha'],
+            [1, 2, 3, 4]
+        ]
+
+        console.log(multiArr[0][0], multiArr[1][0]);
+        console.log(multiArr[0][1], multiArr[1][1]);
+        console.log(multiArr[0][2], multiArr[1][2]);
+
+        var newArr = [];
+
+
+        // PUSHING INTO NEW ARRAY FROM MULTI ARRAY DYNAMICALLY
+        for (var i = 0; i < multiArr[0].length; i++) {
+            newArr.push(multiArr[0][i])
+            newArr.push(multiArr[1][i])
+        }
+
+
+
+        // PUSHING FROM SINGLE ARRAY INTO ANOTHER SINGLE ARRAY
+
+        var students = ['a', 'b', 'c', 'd'];
+
+        var record = [];
+
+        for (var i = 0; i < students.length; i++) {
+            record.push(students[i]);
+        }
+
+
+        var profession = [
+            ['Doctor', 'Engineer', 'Pilot', 'Artist'],
+            [1, 2, 3, 4],
+            ['Saves', 'Designs', 'Flies', 'Creates']
+        ]
+
+        var dynamicArr = [];
+
+        for (var i = 0; i < profession[0].length; i++) {
+            dynamicArr.push(profession[0][i])
+            dynamicArr.push(profession[1][i])
+            dynamicArr.push(profession[2][i])
+        }
+
+
+
+        //CHECK THE LENGTH OF THE ELEMENT OF ARRAY
+        var testArr = ['Apple', 'Ball', 'Mango', 'Orange'];
+
+        for (var i = 0; i < testArr.length; i++) {
+            if(testArr[i].length >= 5){
+                console.log(testArr[i]);
+            }
+            else {
+                console.log('Length is equals to 3 :- ' + testArr[i]);
+            }
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </script>
+
+</body>
+
+</html>

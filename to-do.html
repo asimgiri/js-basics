@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link href="https://fonts.googleapis.com/css?family=Cabin&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Cabin', sans-serif;
+        }
+
+        .table_div {
+            text-align: center;
+            margin-top: 100px;
+        }
+
+        table {
+            border: 1px solid #888;
+            border-collapse: collapse;
+            margin: 15px auto;
+        }
+
+        th,
+        td {
+            border: 1px solid #888;
+            padding: 10px 40px;
+        }
+
+        button {
+            padding: 8px 20px;
+            border-radius: .25rem;
+            cursor: pointer;
+            font-family: 'Cabin', sans-serif;
+        }
+
+        button:focus {
+            outline: none;
+        }
+    </style>
+
+
+</head>
+
+<body>
+
+    <div class="table_div">
+        <button id="add_btn">Add</button>
+        <table id="task_table">
+            <tr>
+                <th id="sn">#</th>
+                <th>Task</th>
+                <th>Created</th>
+                <th>Action</th>
+            </tr>
+        </table>
+    </div>
+
+
+    <script>
+
+        var j = 0;
+        function inc() {
+            j++;
+            document.querySelector('#sn').firstChild.innerText = j;
+            return j;
+        }
+
+
+        function deleteTask(element) {
+            console.log(element.parentElement.parentElement);
+            element.parentElement.parentElement.remove();
+        }
+
+        function generateTableData(sn, task, date, act_btn) {
+            var taskTable = document.querySelector('#task_table');
+            var row = taskTable.insertRow(1);
+            var cell0 = row.insertCell(0);
+            var cell1 = row.insertCell(1);
+            var cell2 = row.insertCell(2);
+            var cell3 = row.insertCell(3);
+
+            cell0.innerHTML = sn
+            cell1.innerHTML = task
+            cell2.innerHTML = date
+            cell3.innerHTML = act_btn
+
+            return {
+                sn,
+                task,
+                date,
+                act_btn
+            }
+
+        }
+
+        function addTask() {
+
+            let sn = inc();
+            let task = prompt('Enter a Task');
+            let date = `${new Date().getMonth() + 1}/${new Date().getDate()}/${new Date().getFullYear()}`;
+            let action = `<button id="delete_btn" onclick="deleteTask(this)">Delete</button>`
+
+            var theObj = generateTableData(sn, task, date, action)
+
+            var str_task = JSON.stringify(theObj);
+
+            localStorage.setItem(theObj.task, str_task);
+
+
+        }
+
+        var addBtn = document.querySelector('#add_btn');
+
+        addBtn.addEventListener('click', addTask);
+
+
+        window.addEventListener('load', function (event) {
+
+            for (var i = 0; i < localStorage.length; i++) {
+                var x = localStorage.key(i);
+                console.log(x);
+                var y = JSON.parse(localStorage.getItem(x));
+                generateTableData(y.sn, y.task, y.date, y.act_btn);
+            }
+        })
+
+    </script>
+
+</body>
+
+</html>

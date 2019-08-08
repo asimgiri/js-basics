@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link href="https://fonts.googleapis.com/css?family=Cabin&display=swap" rel="stylesheet">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Cabin', sans-serif;
+            background: #f5f5f5;
+        }
+
+        .quiz_wrapper {
+            padding: 20px;
+            text-align: center;
+        }
+
+        .score_wrapper {
+            text-align: center;
+            margin: 30px auto;
+            font-size: 14px;
+            width: 100px;
+            border: 2px solid rgb(0, 123, 255); 
+            background: rgba(0, 123, 255,.09);
+            padding: 12px;
+        }
+
+        .user_score {
+            font-weight: bold;
+        }
+
+        .quiz_wrapper h4 {
+            margin-top: 20px;
+            margin-bottom: 10px;
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 12px;
+        }
+
+        .quiz_wrapper label {
+            cursor: pointer;
+        }
+
+        .quiz_wrapper input {
+            margin: 20px 14px 40px;
+            cursor: pointer;
+        }
+
+        .quiz_wrapper button {
+            display: block;
+            border-radius: .25rem;
+            padding: 5px 14px;
+            margin: auto;
+            font-family: 'Cabin', sans-serif;
+            cursor: pointer;
+        }
+
+        .quiz_wrapper button:focus {
+            outline: none;
+        }
+
+        .message {
+            margin-top: 20px;
+            font-size: 14px;
+            color: rgb(0, 123, 255);
+        }
+
+        .secondbtn {
+            margin-top: 20px !important;
+        }
+
+        .thirdbtn {
+            margin-top: 20px !important;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="score_wrapper">
+        <p>Score : <span class="user_score">0</span></p>
+    </div>
+
+    <div class="quiz_wrapper">
+    </div>
+
+
+    <script>
+
+        class Question {
+
+            constructor(question) {
+                this.question = question,
+                    this.optionList = []
+            }
+
+            addOptions(a, b, c, d) {
+                this.optionList.push(a, b, c, d);
+                return this;
+            }
+
+            correctAnswer(correct) {
+                this.correct = correct;
+                return this;
+            }
+
+            userAnswer(user) {
+                this.user = user;
+                return this;
+            }
+
+            checkAnswer() {
+                if (this.correct == this.user) {
+                    console.log('You answer is correct !')
+                    return true;
+                }
+                console.log('Your answer is incorrect !');
+            }
+
+        }
+
+
+        class Quiz {
+
+            constructor() {
+                this.questionList = [],
+                    this.currentQuiz = 0;
+                this.score = 0;
+            }
+
+            addQuestion(question, options, correct, user) {
+                let q = new Question(question).addOptions(...options).correctAnswer(correct).userAnswer(user);
+                this.questionList.push(q);
+            }
+
+            scoreCount() {
+                
+                this.score += 5;  /* score is incremented by 5 on every correct answer */
+
+                document.querySelector('.user_score').innerText = this.score;
+            }
+
+            nextQuiz() {
+                this.currentQuiz++;
+                this.generateQuiz();
+            }
+
+            check() {
+                // DETERMINING IF ANY RADIO BUTTON IS CHECKED OR NOT AND PASSING THE VALUE IF CHECKED ONLY
+
+                for (var i = 0; i < quiz.questionList[this.currentQuiz].optionList.length; i++) {
+                    if (document.getElementById(`${quiz.questionList[this.currentQuiz].optionList[i]}`).checked) {
+                        var optionValue = document.getElementById(`${quiz.questionList[this.currentQuiz].optionList[i]}`).value;
+
+                        //SEEING IF THE CHECKED RADIO VALUE IS EQUALS TO THE PREDEFINED CORRECT VALUE                    
+
+                        if (optionValue == quiz.questionList[this.currentQuiz].correct) {
+                            console.log('Your answer is correct');
+                            document.querySelector('.message').innerText = 'Congratulation! You have given correct answer';
+                            document.querySelector('.btn').disabled = true;
+                            this.scoreCount();
+
+                            var custom_secondbtn = document.createElement('button');
+                            custom_secondbtn.innerText = 'Next';
+                            custom_secondbtn.setAttribute('class', 'secondbtn');
+                            custom_secondbtn.setAttribute('onclick', 'quiz.nextQuiz()');
+
+
+                            document.querySelector('.quiz_wrapper').append(custom_secondbtn);
+
+                        }
+
+                        else {
+
+                            console.log('Your answer is incorrect');
+                            document.querySelector('.message').innerText = 'Your answer is incorrect, Better luck next time !';
+                            document.querySelector('.btn').disabled = true;
+
+                            var custom_thirdbtn = document.createElement('button');
+                            custom_thirdbtn.innerText = 'Try Again';
+                            custom_thirdbtn.setAttribute('class', 'thirdbtn');
+                            // custom_thirdbtn.setAttribute('onclick', 'location.reload()')
+
+                            document.querySelector('.quiz_wrapper').append(custom_thirdbtn);
+                        }
+
+                    }
+                }
+            }
+
+            generateQuiz() {
+
+                document.querySelector('.quiz_wrapper').innerHTML = '';
+
+                //HEADING
+                var custom_question = document.createElement('h4');
+                custom_question.innerText = quiz.questionList[this.currentQuiz].question;
+
+
+                // LABELS 
+                var custom_labelOne = document.createElement('label');
+                custom_labelOne.setAttribute('for', `${quiz.questionList[this.currentQuiz].optionList[0]}`)
+                custom_labelOne.innerText = quiz.questionList[this.currentQuiz].optionList[0];
+
+                var custom_labelTwo = document.createElement('label');
+                custom_labelTwo.setAttribute('for', `${quiz.questionList[this.currentQuiz].optionList[1]}`)
+                custom_labelTwo.innerText = quiz.questionList[this.currentQuiz].optionList[1];
+
+                var custom_labelThree = document.createElement('label');
+                custom_labelThree.setAttribute('for', `${quiz.questionList[this.currentQuiz].optionList[2]}`)
+                custom_labelThree.innerText = quiz.questionList[this.currentQuiz].optionList[2];
+
+                var custom_labelFour = document.createElement('label');
+                custom_labelFour.setAttribute('for', `${quiz.questionList[this.currentQuiz].optionList[3]}`)
+                custom_labelFour.innerText = quiz.questionList[this.currentQuiz].optionList[3];
+
+
+                // INPUT FIELDS
+                var custom_inputOne = document.createElement('input');
+                custom_inputOne.setAttribute('type', 'radio');
+                custom_inputOne.setAttribute('id', `${quiz.questionList[this.currentQuiz].optionList[0]}`)
+                custom_inputOne.setAttribute('value', `${quiz.questionList[this.currentQuiz].optionList[0]}`)
+                custom_inputOne.setAttribute('name', 'option');
+
+                var custom_inputTwo = document.createElement('input');
+                custom_inputTwo.setAttribute('type', 'radio');
+                custom_inputTwo.setAttribute('id', `${quiz.questionList[this.currentQuiz].optionList[1]}`);
+                custom_inputTwo.setAttribute('value', `${quiz.questionList[this.currentQuiz].optionList[1]}`);
+                custom_inputTwo.setAttribute('name', 'option');
+
+                var custom_inputThree = document.createElement('input');
+                custom_inputThree.setAttribute('type', 'radio');
+                custom_inputThree.setAttribute('id', `${quiz.questionList[this.currentQuiz].optionList[2]}`);
+                custom_inputThree.setAttribute('value', `${quiz.questionList[this.currentQuiz].optionList[2]}`);
+                custom_inputThree.setAttribute('name', 'option');
+
+                var custom_inputFour = document.createElement('input');
+                custom_inputFour.setAttribute('type', 'radio');
+                custom_inputFour.setAttribute('id', `${quiz.questionList[this.currentQuiz].optionList[3]}`);
+                custom_inputFour.setAttribute('value', `${quiz.questionList[this.currentQuiz].optionList[3]}`);
+                custom_inputFour.setAttribute('name', 'option');
+
+
+                // BUTTONS
+                var custom_btn = document.createElement('button');
+                custom_btn.innerText = 'Submit';
+                custom_btn.setAttribute('class', 'btn');
+
+
+                custom_btn.setAttribute('onclick', 'quiz.check()') /* check the values on btn click */
+
+
+                //MESSAGE
+                var custom_para = document.createElement('p');
+                custom_para.setAttribute('class', 'message');
+
+
+                //APPENDING ALL THE ELEMENTS IN A SEQUENCE
+                document.querySelector('.quiz_wrapper')
+                    .append(
+                        custom_question,
+                        custom_inputOne,
+                        custom_labelOne,
+                        custom_inputTwo,
+                        custom_labelTwo,
+                        custom_inputThree,
+                        custom_labelThree,
+                        custom_inputFour,
+                        custom_labelFour,
+                        custom_btn,
+                        custom_para
+                    );
+            }
+
+        }
+
+        var quiz = new Quiz();
+
+        //  ALWAYS RETURN THIS FOR METHOD CHAINING
+        quiz.addQuestion('What is the capital city of Nepal ?', ['Biratnagar', 'Lamjung', 'Banepa', 'Kathmandu'], 'Kathmandu', 'Kathmandu');
+        quiz.addQuestion('Who is the PM of Nepal ?', ['BabuRam', 'KP Sharma Oli', 'Prachanda', 'Sherbahadur'], 'KP Sharma Oli', 'KP Sharma Oli');
+
+        quiz.generateQuiz();
+
+
+    </script>
+
+</body>
+
+</html>

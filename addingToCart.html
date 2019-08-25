@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <script>
+
+        class Product {
+            constructor(name, price, brand, category) {
+                this.name = name,
+                    this.price = price,
+                    this.brand = brand,
+                    this.category = category
+            }
+        }
+
+        class Cart {
+            constructor() {
+                this.productsList = []
+            }
+
+            addProduct(name, price, brand, category) {
+                let p = new Product(name, price, brand, category);
+                this.productsList.push(p);
+            }
+
+            removeProduct(index) {
+                this.productsList.splice(index, 1);
+                this.calculatePrice();
+                return this;
+            }
+
+            calculatePrice() {
+                let arr = [];
+                let sum;
+                for (let i = 0; i < this.productsList.length; i++) {
+                    arr.push(this.productsList[i].price);
+                    sum = arr.reduce((total, num) => {
+                        return total + num;
+                    })
+                }
+                console.log(`The total price of the products : Rs.${sum}`);
+                return sum;
+            }
+
+            // Filtering products accoring to the name of products.
+
+            findProduct(name) {
+                return this.productsList.filter((value) => {
+                    return value.name.includes(name);
+                })
+            }
+        }
+
+        let cartOne = new Cart();
+        cartOne.addProduct('Smart Phone', 28000, 'Samsung', 'Mobile Phones');
+        cartOne.addProduct('Blue Jeans', 5000, 'Levis', 'Apparels');
+        cartOne.addProduct('Golden Watch', 62000, 'Rolex', 'Accessories');
+
+    </script>
+
+</body>
+
+</html>
